@@ -1,19 +1,11 @@
-# my-better-t-app
+# Veterinary-app
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Express, and more.
+## Why Turborepo
 
-## Features
-
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Express** - Fast, unopinionated web framework
-- **Node.js** - Runtime environment
-- **Mongoose** - TypeScript-first ORM
-- **MongoDB** - Database engine
-- **Authentication** - Better-Auth
-- **Turborepo** - Optimized monorepo build system
+- **Code Reusability** - Shared packages (auth, db, env) across frontend and backend without duplication
+- **Type Safety** - Shared TypeScript types and configurations ensure consistency across apps
+- **Efficient Builds** - Intelligent caching and parallel execution speed up development and CI/CD
+- **Developer Experience** - Single repository for the entire stack with workspace-aware tooling
 
 ## Getting Started
 
@@ -48,7 +40,7 @@ The API is running at [http://localhost:3000](http://localhost:3000).
 ## Project Structure
 
 ```
-my-better-t-app/
+veterinary-app/
 ├── apps/
 │   ├── web/         # Frontend application (Next.js)
 │   └── server/      # Backend API (Express)
