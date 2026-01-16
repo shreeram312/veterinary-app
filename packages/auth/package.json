@@ -1,0 +1,24 @@
+{
+  "name": "@veterinary-app/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@veterinary-app/db": "workspace:*",
+    "@veterinary-app/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@veterinary-app/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@veterinary-app/db",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@veterinary-app/env": "workspace:*",
+    "dotenv": "catalog:",
+    "mongoose": "^8.14.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@veterinary-app/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
