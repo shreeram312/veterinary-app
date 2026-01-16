@@ -12,12 +12,12 @@ app.use(
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  }),
+  })
 );
 
-app.all("/api/auth{/*path}", toNodeHandler(auth));
-
 app.use(express.json());
+
+app.use("/api/auth", toNodeHandler(auth));
 
 app.get("/", (_req, res) => {
   res.status(200).send("OK");
