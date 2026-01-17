@@ -1,12 +1,12 @@
 "use client";
 import { redirect } from "next/navigation";
-import { Calendar, Users, Clock, Code, Copy } from "lucide-react";
+import { Code, Copy } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 
 const WIDGET_URL = process.env.NEXT_PUBLIC_WIDGET_URL;
 
-export default function DashboardPage() {
+export default function IntegrationPage() {
   const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
@@ -35,47 +35,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="rounded-lg border border-border bg-white p-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Total Appointments</p>
-              <p className="mt-2 text-3xl font-bold text-foreground">1,284</p>
-              <p className="mt-1 text-sm text-emerald-600">↑12% from last month</p>
-            </div>
-            <div className="rounded-lg bg-emerald-50 p-3">
-              <Calendar className="h-6 w-6 text-emerald-600" />
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-border bg-white p-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Active Users (Today)</p>
-              <p className="mt-2 text-3xl font-bold text-foreground">42</p>
-              <p className="mt-1 text-sm text-muted-foreground">Currently online</p>
-            </div>
-            <div className="rounded-lg bg-blue-50 p-3">
-              <Users className="h-6 w-6 text-blue-600" />
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-border bg-white p-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Pending Requests</p>
-              <p className="mt-2 text-3xl font-bold text-foreground">7</p>
-              <p className="mt-1 text-sm text-orange-500">Requires attention</p>
-            </div>
-            <div className="rounded-lg bg-orange-50 p-3">
-              <Clock className="h-6 w-6 text-orange-500" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="rounded-lg border border-border bg-white">
         <div className="flex items-center justify-between border-b border-border p-6">
           <div className="flex items-center gap-3">

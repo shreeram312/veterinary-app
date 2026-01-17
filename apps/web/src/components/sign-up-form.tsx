@@ -56,10 +56,10 @@ export default function SignUpForm({
   }
 
   return (
-    <div className="mx-auto w-full mt-10 max-w-md p-6 rounded-lg border border-border bg-card">
-      <h1 className="mb-6 text-center text-3xl font-bold text-foreground">
+    <div className="w-full rounded-xl border border-border bg-white p-8 shadow-sm">
+      <h2 className="mb-6 text-center text-2xl font-semibold text-foreground">
         Create Account
-      </h1>
+      </h2>
 
       <form
         onSubmit={(e) => {
@@ -67,106 +67,103 @@ export default function SignUpForm({
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="space-y-4"
+        className="space-y-5"
       >
-        <div>
-          <form.Field name="name">
-            {(field) => (
-              <div className="space-y-2">
-                <Label htmlFor={field.name} className="text-foreground">
-                  Name
-                </Label>
-                <Input
-                  className="border border-border rounded-lg"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-                {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-destructive text-sm">
-                    {error?.message}
-                  </p>
-                ))}
-              </div>
-            )}
-          </form.Field>
-        </div>
+        <form.Field name="name">
+          {(field) => (
+            <div className="space-y-2">
+              <Label htmlFor={field.name} className="text-foreground font-medium">
+                Name
+              </Label>
+              <Input
+                className="h-11 rounded-lg border-border bg-gray-50 focus:bg-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                id={field.name}
+                name={field.name}
+                placeholder="John Doe"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+              />
+              {field.state.meta.errors.map((error) => (
+                <p key={error?.message} className="text-destructive text-sm">
+                  {error?.message}
+                </p>
+              ))}
+            </div>
+          )}
+        </form.Field>
 
-        <div>
-          <form.Field name="email">
-            {(field) => (
-              <div className="space-y-2">
-                <Label htmlFor={field.name} className="text-foreground">
-                  Email
-                </Label>
-                <Input
-                  className="border border-border rounded-lg"
-                  id={field.name}
-                  name={field.name}
-                  type="email"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-                {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-destructive text-sm">
-                    {error?.message}
-                  </p>
-                ))}
-              </div>
-            )}
-          </form.Field>
-        </div>
+        <form.Field name="email">
+          {(field) => (
+            <div className="space-y-2">
+              <Label htmlFor={field.name} className="text-foreground font-medium">
+                Email
+              </Label>
+              <Input
+                className="h-11 rounded-lg border-border bg-gray-50 focus:bg-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                id={field.name}
+                name={field.name}
+                type="email"
+                placeholder="you@example.com"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+              />
+              {field.state.meta.errors.map((error) => (
+                <p key={error?.message} className="text-destructive text-sm">
+                  {error?.message}
+                </p>
+              ))}
+            </div>
+          )}
+        </form.Field>
 
-        <div>
-          <form.Field name="password">
-            {(field) => (
-              <div className="space-y-2">
-                <Label htmlFor={field.name} className="text-foreground">
-                  Password
-                </Label>
-                <Input
-                  className="border border-border rounded-lg"
-                  id={field.name}
-                  name={field.name}
-                  type="password"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-                {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-destructive text-sm">
-                    {error?.message}
-                  </p>
-                ))}
-              </div>
-            )}
-          </form.Field>
-        </div>
+        <form.Field name="password">
+          {(field) => (
+            <div className="space-y-2">
+              <Label htmlFor={field.name} className="text-foreground font-medium">
+                Password
+              </Label>
+              <Input
+                className="h-11 rounded-lg border-border bg-gray-50 focus:bg-white focus:border-emerald-500 focus:ring-emerald-500/20"
+                id={field.name}
+                name={field.name}
+                type="password"
+                placeholder="••••••••"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+              />
+              {field.state.meta.errors.map((error) => (
+                <p key={error?.message} className="text-destructive text-sm">
+                  {error?.message}
+                </p>
+              ))}
+            </div>
+          )}
+        </form.Field>
 
         <form.Subscribe>
           {(state) => (
             <Button
               type="submit"
-              className="w-full"
+              className="w-full h-11 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
               disabled={!state.canSubmit || state.isSubmitting}
             >
-              {state.isSubmitting ? "Submitting..." : "Sign Up"}
+              {state.isSubmitting ? "Creating account..." : "Sign Up"}
             </Button>
           )}
         </form.Subscribe>
       </form>
 
-      <div className="mt-4 text-center">
-        <Button
-          variant="link"
+      <div className="mt-6 text-center">
+        <span className="text-muted-foreground text-sm">Already have an account? </span>
+        <button
           onClick={onSwitchToSignIn}
-          className="text-accent-foreground hover:text-accent-foreground/80"
+          className="text-emerald-600 hover:text-emerald-700 font-medium text-sm"
         >
-          Already have an account? Sign In
-        </Button>
+          Sign In
+        </button>
       </div>
     </div>
   );

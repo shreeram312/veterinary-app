@@ -59,7 +59,7 @@ importers:
         version: link:../../packages/env
       better-auth:
         specifier: 'catalog:'
-        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(@babel/core@7.28.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -103,12 +103,18 @@ importers:
       '@icons-pack/react-simple-icons':
         specifier: ^13.7.0
         version: 13.8.0(react@19.2.3)
+      '@radix-ui/react-slot':
+        specifier: ^1.2.4
+        version: 1.2.4(@types/react@19.2.8)(react@19.2.3)
       '@radix-ui/react-use-controllable-state':
         specifier: ^1.2.2
         version: 1.2.2(@types/react@19.2.8)(react@19.2.3)
       '@shikijs/transformers':
         specifier: ^3.21.0
         version: 3.21.0
+      '@tabler/icons-react':
+        specifier: ^3.36.1
+        version: 3.36.1(react@19.2.3)
       '@tanstack/react-form':
         specifier: ^1.27.3
         version: 1.27.7(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -123,7 +129,7 @@ importers:
         version: 1.0.0
       better-auth:
         specifier: 'catalog:'
-        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(@babel/core@7.28.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -208,7 +214,7 @@ importers:
         version: 1.0.0
       better-auth:
         specifier: 'catalog:'
-        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(@babel/core@7.28.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -281,7 +287,7 @@ importers:
         version: link:../env
       better-auth:
         specifier: 'catalog:'
-        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(@babel/core@7.28.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 1.4.13(mongodb@6.20.0)(next@16.1.2(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       dotenv:
         specifier: 'catalog:'
         version: 17.2.3
@@ -1048,6 +1054,24 @@ packages:
   '@quansync/fs@1.0.0':
     resolution: {integrity: sha512-4TJ3DFtlf1L5LDMaM6CanJ/0lckGNtJcMjQ1NAV6zDmA0tEHKZtxNKin8EgPaVX1YzljbxckyT2tJrpQKAtngQ==}
 
+  '@radix-ui/react-compose-refs@1.1.2':
+    resolution: {integrity: sha512-z4eqJvfiNnFMHIIvXP3CY57y2WJs5g2v3X0zm9mEJkrkNv4rDxu+sg9Jh8EkXyeqBkB7SOcboo9dMVqhyrACIg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@radix-ui/react-slot@1.2.4':
+    resolution: {integrity: sha512-Jl+bCv8HxKnlTLVrcDE8zTMJ09R9/ukw4qBs/oZClOfoQk/cOTbDn+NceXfV7j09YPVQUryJPHurafcSg6EVKA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@radix-ui/react-use-controllable-state@1.2.2':
     resolution: {integrity: sha512-BjasUjixPFdS+NKkypcyyN5Pmg83Olst0+c6vGov0diwTEo6mgdqVR6hxcEgFuh4QrAs7Rc+9KuGJ9TVCj0Zzg==}
     peerDependencies:
@@ -1311,6 +1335,14 @@ packages:
         optional: true
       zod:
         optional: true
+
+  '@tabler/icons-react@3.36.1':
+    resolution: {integrity: sha512-/8nOXeNeMoze9xY/QyEKG65wuvRhkT3q9aytaur6Gj8bYU2A98YVJyLc9MRmc5nVvpy+bRlrrwK/Ykr8WGyUWg==}
+    peerDependencies:
+      react: '>= 16'
+
+  '@tabler/icons@3.36.1':
+    resolution: {integrity: sha512-f4Jg3Fof/Vru5ioix/UO4GX+sdDsF9wQo47FbtvG+utIYYVQ/QVAC0QYgcBbAjQGfbdOh2CCf0BgiFOF9Ixtjw==}
 
   '@tailwindcss/node@4.1.18':
     resolution: {integrity: sha512-DoR7U1P7iYhw16qJ49fgXUlry1t4CpXeErJHnQ44JgTSKMaZUdf17cfn5mHchfJ4KRBZRFA/Coo+MUF5+gOaCQ==}
@@ -3886,6 +3918,19 @@ snapshots:
     dependencies:
       quansync: 1.0.0
 
+  '@radix-ui/react-compose-refs@1.1.2(@types/react@19.2.8)(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.8
+
+  '@radix-ui/react-slot@1.2.4(@types/react@19.2.8)(react@19.2.3)':
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.8)(react@19.2.3)
+      react: 19.2.3
+    optionalDependencies:
+      '@types/react': 19.2.8
+
   '@radix-ui/react-use-controllable-state@1.2.2(@types/react@19.2.8)(react@19.2.3)':
     dependencies:
       '@radix-ui/react-use-effect-event': 0.0.2(@types/react@19.2.8)(react@19.2.3)
@@ -4055,6 +4100,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
       zod: 4.3.5
+
+  '@tabler/icons-react@3.36.1(react@19.2.3)':
+    dependencies:
+      '@tabler/icons': 3.36.1
+      react: 19.2.3
+
+  '@tabler/icons@3.36.1': {}
 
   '@tailwindcss/node@4.1.18':
     dependencies:
@@ -4289,7 +4341,7 @@ snapshots:
 
   baseline-browser-mapping@2.9.14: {}
 
-  better-auth@1.4.13(mongodb@6.20.0)(next@16.1.2(@babel/core@7.28.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  better-auth@1.4.13(mongodb@6.20.0)(next@16.1.2(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       '@better-auth/core': 1.4.13(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.7(zod@4.3.5))(jose@6.1.3)(kysely@0.28.9)(nanostores@1.1.0)
       '@better-auth/telemetry': 1.4.13(@better-auth/core@1.4.13(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.7(zod@4.3.5))(jose@6.1.3)(kysely@0.28.9)(nanostores@1.1.0))
