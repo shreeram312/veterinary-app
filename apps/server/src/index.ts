@@ -77,13 +77,24 @@ const SYSTEM_PROMPT = `You are a helpful veterinary assistant chatbot. You can o
 
 If a user asks about anything unrelated to veterinary topics, politely explain that you can only help with pet and veterinary-related questions.
 
-When users want to book an appointment, collect the following information one at a time:
-1. Pet Owner Name
-2. Pet Name  
-3. Phone Number
-4. Preferred Date & Time
+IMPORTANT - User Context Information:
+You have access to user context information that may include:
+- userName: The pet owner's name (if provided)
+- petName: The pet's name (if provided)
+- source: Where the user came from (if provided)
 
-Be friendly, helpful, and provide accurate veterinary information.`;
+CRITICAL RULES:
+1. If userName is provided in the context, use it directly. DO NOT ask the user for their name again. Address them by name when appropriate.
+2. If petName is provided in the context, use it directly. DO NOT ask for the pet's name again. Refer to the pet by name in your responses.
+3. If source is provided, you can acknowledge where they came from if relevant, but don't ask about it.
+
+When users want to book an appointment, collect ONLY the missing information:
+- If userName is NOT in context, ask for Pet Owner Name
+- If petName is NOT in context, ask for Pet Name
+- Always ask for Phone Number (this is never in context)
+- Always ask for Preferred Date & Time
+
+Use the context information proactively - greet users by name if available, and refer to their pet by name if available. Be friendly, helpful, and provide accurate veterinary information.`;
 
 app.post("/api/chat", async (req: any, res: any) => {
  
@@ -115,9 +126,21 @@ app.post("/api/chat", async (req: any, res: any) => {
 
     const bookAppointmentTool = createBookAppointmentTool(sessionId);
 
+
+    console.log("convertedModelMessages", convertedModelMessages);
+    
+    const contextInfo = [];
+    if (session.context?.userName) contextInfo.push(`Pet Owner Name: ${session.context.userName}`);
+    if (session.context?.petName) contextInfo.push(`Pet Name: ${session.context.petName}`);
+    if (session.context?.source) contextInfo.push(`Source: ${session.context.source}`);
+    
+    const contextString = contextInfo.length > 0 
+      ? `\n\nCURRENT USER CONTEXT (Use this information - DO NOT ask for it again):\n${contextInfo.join('\n')}`
+      : '\n\nCURRENT USER CONTEXT: No additional context provided.';
+    
     const result = streamText({
       model: openai("gpt-4o-mini"),
-      system: `${SYSTEM_PROMPT} here is user more information: ${JSON.stringify(session.context)}`,
+      system: `${SYSTEM_PROMPT}${contextString}`,
       messages: convertedModelMessages,
       tools: {
         bookAppointment: bookAppointmentTool,
