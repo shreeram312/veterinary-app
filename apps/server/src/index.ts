@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: [env.CORS_ORIGIN, "http://localhost:3002","https://52f38c355685.ngrok-free.app"],     
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
