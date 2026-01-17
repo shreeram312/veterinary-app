@@ -1,5 +1,5 @@
 const f = {
-    WIDGET_URL: `http://localhost:3002`,
+    WIDGET_URL: `https://veterinary-app-widget.vercel.app`,
     DEFAULT_TYPE: "bubble",
   },
   E =
