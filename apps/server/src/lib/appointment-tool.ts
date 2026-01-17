@@ -38,17 +38,7 @@ export const createBookAppointmentTool = (sessionId: string) => tool({
       };
 
       if (session.appointment) {
-        session.appointment.petOwnerName = petOwnerName;
-        session.appointment.petName = petName;
-        session.appointment.phoneNumber = phoneNumber;
-        session.appointment.preferredDate = new Date(preferredDate);
-        session.appointment.preferredTime = preferredTime;
-        session.appointment.updatedAt = new Date();
-        session.updatedAt = new Date();
-        
-        await session.save();
-        
-        return `Appointment updated successfully for ${petOwnerName} and ${petName} on ${preferredDate} at ${preferredTime}. Your appointment ID is ${session.appointment.id}.`;
+        return `You already booked an appointment. Your appointment ID is ${session.appointment.id} for ${session.appointment.petName} on ${session.appointment.preferredDate.toISOString().split('T')[0]} at ${session.appointment.preferredTime}.`;
       }
 
       session.appointment = appointmentData;
