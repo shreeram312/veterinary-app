@@ -12,7 +12,7 @@ const userSchema = new Schema(
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
   },
-  { collection: "user" },
+  { collection: "user" }
 );
 
 const sessionSchema = new Schema(
@@ -26,7 +26,7 @@ const sessionSchema = new Schema(
     userAgent: { type: String },
     userId: { type: String, ref: "User", required: true },
   },
-  { collection: "session" },
+  { collection: "session" }
 );
 
 const accountSchema = new Schema(
@@ -45,7 +45,7 @@ const accountSchema = new Schema(
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
   },
-  { collection: "account" },
+  { collection: "account" }
 );
 
 const verificationSchema = new Schema(
@@ -57,12 +57,33 @@ const verificationSchema = new Schema(
     createdAt: { type: Date },
     updatedAt: { type: Date },
   },
-  { collection: "verification" },
+  { collection: "verification" }
+);
+
+const vetChatbotSessionSchema = new Schema(
+  {
+    _id: { type: String },
+    sessionId: { type: String, required: true, unique: true },
+
+    clinicId: { type: String, ref: "User", required: true },
+
+    context: {
+      userId: { type: String },
+      userName: { type: String },
+      petName: { type: String },
+      source: { type: String },
+    },
+
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+  },
+  { collection: "vet_chatbot_session" }
 );
 
 const User = model("User", userSchema);
 const Session = model("Session", sessionSchema);
 const Account = model("Account", accountSchema);
 const Verification = model("Verification", verificationSchema);
+const VetChatbotSession = model("VetChatbotSession", vetChatbotSessionSchema);
 
-export { User, Session, Account, Verification };
+export { User, Session, Account, Verification, VetChatbotSession };
