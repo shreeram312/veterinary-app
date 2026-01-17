@@ -19,15 +19,7 @@ export function DashboardHeader() {
         <Button
           variant="ghost"
           className="rounded-md text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
-          onClick={() => {
-            authClient.signOut({
-              fetchOptions: {
-                onSuccess: () => {
-                  router.push("/login");
-                },
-              },
-            });
-          }}
+          onClick={async () => await authClient.signOut()}
         >
           Logout
         </Button>

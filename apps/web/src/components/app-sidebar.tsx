@@ -35,13 +35,7 @@ const navItems = [
   },
 ];
 
-const developerItems = [
-  {
-    title: "Integration / Embed",
-    url: "/dashboard/integration",
-    icon: IconCode,
-  },
-];
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
@@ -106,36 +100,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className="gap-1 mt-4">
+        {/* <SidebarGroup className="gap-1 mt-4">
           <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 px-2">
             Developer
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-1">
-              {developerItems.map((item) => {
-                const isActive = pathname === item.url;
-                return (
-                  <SidebarMenuItem key={item.url}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className={
-                        isActive
-                          ? "bg-emerald-50 text-emerald-600 border-l-[3px] border-emerald-600 rounded-r-md rounded-l-none font-medium"
-                          : "text-muted-foreground hover:bg-accent hover:text-foreground rounded-md"
-                      }
-                    >
-                      <Link href={item.url as any}>
-                        <item.icon className="size-5!" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+          
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border p-3">

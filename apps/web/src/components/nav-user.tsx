@@ -47,6 +47,9 @@ export function NavUser() {
           <span className="text-sm font-medium text-foreground truncate block">
             {data?.user.name || "User"}
           </span>
+          <span className="text-xs text-muted-foreground truncate block">
+            {data?.user.email || ""}
+          </span>
         </div>
         <IconDotsVertical className="size-4 text-muted-foreground" />
       </DropdownMenuTrigger>
