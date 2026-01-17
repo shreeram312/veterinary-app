@@ -1,4 +1,4 @@
-import "@veterinary-app/env/web";
+import "@veterinary-app/env/widget";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
