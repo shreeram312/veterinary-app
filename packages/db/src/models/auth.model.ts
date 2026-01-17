@@ -60,6 +60,25 @@ const verificationSchema = new Schema(
   { collection: "verification" }
 );
 
+const appointmentSubSchema = new Schema(
+  {
+    id: { type: String, required: true },
+    petOwnerName: { type: String, required: true },
+    petName: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    preferredDate: { type: Date, required: true },
+    preferredTime: { type: String, required: true },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "cancelled", "completed"],
+      default: "pending",
+    },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+  },
+  { _id: false }
+);
+
 const vetChatbotSessionSchema = new Schema(
   {
     _id: { type: String },
@@ -73,6 +92,8 @@ const vetChatbotSessionSchema = new Schema(
       petName: { type: String },
       source: { type: String },
     },
+
+    appointment: { type: appointmentSubSchema },
 
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
@@ -100,7 +121,7 @@ const appointmentSchema = new Schema(
   {
     _id: { type: String },
     id: { type: String, required: true, unique: true },
-    sessionId: { type: String, ref: "VetChatbotSession", required: true },
+    sessionId: { type: String, ref: "VetChatbotSession", required: true, unique: true },
     clinicId: { type: String, ref: "User", required: true },
     petOwnerName: { type: String, required: true },
     petName: { type: String, required: true },

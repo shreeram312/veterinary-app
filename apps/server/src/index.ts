@@ -113,7 +113,7 @@ app.post("/api/chat", async (req: any, res: any) => {
     });
     await modelMessage.save();
 
-    const bookAppointmentTool = createBookAppointmentTool(sessionId, session.clinicId);
+    const bookAppointmentTool = createBookAppointmentTool(sessionId);
 
     const result = streamText({
       model: openai("gpt-4o-mini"),
