@@ -16,7 +16,7 @@ catalogs:
       specifier: ^5
       version: 5.9.3
     zod:
-      specifier: ^4.1.13
+      specifier: 'catalog:'
       version: 4.3.5
 
 importers:

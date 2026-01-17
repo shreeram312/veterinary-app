@@ -96,11 +96,42 @@ const messageSchema = new Schema(
   { collection: "message" }
 );
 
+const appointmentSchema = new Schema(
+  {
+    _id: { type: String },
+    id: { type: String, required: true, unique: true },
+    sessionId: { type: String, ref: "VetChatbotSession", required: true },
+    clinicId: { type: String, ref: "User", required: true },
+    petOwnerName: { type: String, required: true },
+    petName: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    preferredDate: { type: Date, required: true },
+    preferredTime: { type: String, required: true },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "cancelled", "completed"],
+      default: "pending",
+    },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+  },
+  { collection: "appointment" }
+);
+
 const User = model("User", userSchema);
 const Session = model("Session", sessionSchema);
 const Account = model("Account", accountSchema);
 const Verification = model("Verification", verificationSchema);
 const VetChatbotSession = model("VetChatbotSession", vetChatbotSessionSchema);
 const Message = model("Message", messageSchema);
+const Appointment = model("Appointment", appointmentSchema);
 
-export { User, Session, Account, Verification, VetChatbotSession, Message };
+export {
+  User,
+  Session,
+  Account,
+  Verification,
+  VetChatbotSession,
+  Message,
+  Appointment,
+};

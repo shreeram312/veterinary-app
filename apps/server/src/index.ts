@@ -1,12 +1,12 @@
 import { openai } from "@ai-sdk/openai";
 import { auth } from "@veterinary-app/auth";
 import { VetChatbotSession, Message } from "@veterinary-app/db/models";
-import { convertToModelMessages, streamText, type UIMessage, type UserModelMessage } from "ai";
+import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from "ai";
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
-
+import { createBookAppointmentTool } from "./lib/appointment-tool";
 const app = express();
 
 app.use(
@@ -113,10 +113,15 @@ app.post("/api/chat", async (req: any, res: any) => {
     });
     await modelMessage.save();
 
+    const bookAppointmentTool = createBookAppointmentTool(sessionId, session.clinicId);
+
     const result = streamText({
       model: openai("gpt-4o-mini"),
       system: `${SYSTEM_PROMPT} here is user more information: ${JSON.stringify(session.context)}`,
       messages: convertedModelMessages,
+      tools: {
+        bookAppointment: bookAppointmentTool,
+      },
       onFinish: async ({ text }) => {
         const assistantMsg = new Message({
           _id: uuidv4(),
@@ -127,7 +132,10 @@ app.post("/api/chat", async (req: any, res: any) => {
         });
         await assistantMsg.save();
       },
+        stopWhen:stepCountIs(3),
     });
+
+
 
     result.pipeUIMessageStreamToResponse(res);
   } catch (error) {
