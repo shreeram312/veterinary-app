@@ -5,6 +5,9 @@
     ".": {
       "default": "./src/index.ts"
     },
+    "./models": {
+      "default": "./src/models/auth.model.ts"
+    },
     "./*": {
       "default": "./src/*.ts"
     }

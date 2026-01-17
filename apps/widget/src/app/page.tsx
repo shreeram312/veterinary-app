@@ -1,4 +1,5 @@
 import React from "react";
+import { SessionForm } from "@/components/session-form";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -6,23 +7,24 @@ interface PageProps {
 
 const Page = async ({ searchParams }: PageProps) => {
   const params = await searchParams;
-  const veterinaryClinicId = params?.["veterinary-clinic-id"] as string | undefined;
+  const clinicId = params?.["veterinary-clinic-id"] as string | undefined;
+
+  if (!clinicId) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <div className="text-center space-y-4">
+          <h1 className="text-xl font-bold">Invalid Access</h1>
+          <p className="text-muted-foreground">
+            No veterinary clinic ID provided. Please use a valid link.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <div className="text-center space-y-4">
-        <h1 className="text-2xl font-bold">Veterinary Chatbot Widget</h1>
-        {veterinaryClinicId ? (
-          <div className="space-y-2">
-            <p className="text-sm text-gray-600">Veterinary Clinic ID:</p>
-            <p className="text-lg font-mono bg-gray-100 px-4 py-2 rounded border">
-              {veterinaryClinicId}
-            </p>
-          </div>
-        ) : (
-          <p className="text-gray-500">No veterinary clinic ID provided</p>
-        )}
-      </div>
+      <SessionForm clinicId={clinicId} />
     </div>
   );
 };

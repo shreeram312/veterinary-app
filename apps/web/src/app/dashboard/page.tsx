@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Calendar, Users, Clock, Code, Copy } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
+import { CodeBlock, CodeBlockBody, CodeBlockContent, CodeBlockCopyButton, CodeBlockFilename, CodeBlockFiles, CodeBlockHeader, CodeBlockItem } from "@/components/code-block";
 
 const WIDGET_URL = process.env.NEXT_PUBLIC_WIDGET_URL;
 
@@ -17,24 +18,29 @@ export default function DashboardPage() {
     redirect("/login");
   }
 
-  const embedCode = `<!-- VetChat SDK Configuration (Optional) -->
-<script>
-  window.VetChatbotConfig = {
-    userId: "USER_ID_HERE",
-    userName: "USER_NAME", // Optional
-    petName: "PET_NAME"    // Optional
-  };
-</script>
+  const bubbleCode: { language: string; filename: string; code: string }[] = [
+    {
+      language: "html",
+      filename: "bubble-widget.html",
+      code: `<script type="module" src="${WIDGET_URL}/chatbot.js" veterinary-clinic-id=${session?.user?.id} async></script>`,
+    },
+  ];
 
-<!-- VetChat Widget Loader -->
-<script src="${WIDGET_URL}/chatbot.js" veterinary-clinic-id="${session?.user?.id}" async></script>`;
+  const sectionCode: { language: string; filename: string; code: string }[] = [
+    {
+      language: "html",
+      filename: "section-widget.html",
+      code: `<script src="${WIDGET_URL}/chatbot.js" data-type="section" veterinary-clinic-id=${session?.user?.id}></script>`,
+    },
+  ];
+
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(embedCode);
+    navigator.clipboard.writeText(bubbleCode[0].code);
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-full overflow-x-hidden">
       <div className="grid gap-6 md:grid-cols-3">
         <div className="rounded-lg border border-border bg-white p-6">
           <div className="flex items-start justify-between">
@@ -76,7 +82,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-white">
+      <div className="rounded-lg border border-border bg-white overflow-hidden max-w-full w-full">
         <div className="flex items-center justify-between border-b border-border p-6">
           <div className="flex items-center gap-3">
             <Code className="h-5 w-5 text-muted-foreground" />
@@ -86,26 +92,57 @@ export default function DashboardPage() {
             v1.0.2 Stable
           </span>
         </div>
-        <div className="p-6">
-          <p className="mb-4 text-sm text-muted-foreground">
-            Copy and paste this code snippet into the &lt;head&gt; or just before the closing &lt;/body&gt; tag of your website.
-          </p>
-          <div className="relative rounded-lg bg-slate-900 p-4">
-            <Button
-              variant="outline"
-              size="sm"
-              className="absolute right-4 top-4 rounded-md bg-white hover:bg-gray-100"
-              onClick={copyToClipboard}
-            >
-              <Copy className="mr-2 h-4 w-4" />
-              Copy
-            </Button>
-            <pre className="overflow-x-auto pr-20 text-sm">
-              <code className="text-slate-300 whitespace-pre">{embedCode}</code>
-            </pre>
+        <div className="p-4 md:p-6 space-y-4 md:space-y-6 overflow-hidden max-w-full w-full">
+          <div className="space-y-2 min-w-0">
+            <h3 className="text-sm font-medium text-foreground">Bubble Widget</h3>
+            <Snippet code={bubbleCode} />
+          </div>
+          <div className="border-t border-border pt-4 md:pt-6 space-y-2 min-w-0">
+            <h3 className="text-sm font-medium text-foreground">Section Widget</h3>
+            <Snippet code={sectionCode} />
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+const Snippet = ({
+  code,
+}: {
+  code: { language: string; filename: string; code: string }[];
+}) => {
+  return (
+    <div className="w-full min-w-0 max-w-full overflow-hidden">
+      <CodeBlock
+        data={code}
+        defaultValue={code[0].language}
+        className="h-fit w-full min-w-0 max-w-full [&>div]:min-w-0 [&>div]:max-w-full [&_pre]:overflow-x-auto [&_pre]:text-[11px] [&_pre]:leading-tight [&_pre]:max-h-16 [&_pre]:min-w-0 [&_pre]:max-w-full [&_pre]:py-2 [&_code]:max-w-full [&_code]:min-w-0 [&_code]:break-all [&_code]:whitespace-pre [&_.shiki]:max-w-full [&_.shiki]:min-w-0 [&_.line]:break-all [&_.line]:whitespace-pre"
+      >
+      <CodeBlockHeader>
+        <CodeBlockFiles>
+          {(item) => (
+            <CodeBlockFilename key={item.language} value={item.language}>
+              {item.filename}
+            </CodeBlockFilename>
+          )}
+        </CodeBlockFiles>
+        <CodeBlockCopyButton
+          onCopy={() => console.log("Copied code to clipboard")}
+          onError={() => console.error("Failed to copy code to clipboard")}
+        />
+      </CodeBlockHeader>
+      <CodeBlockBody>
+        {(item) => (
+          <CodeBlockItem key={item.language} value={item.language}>
+            <CodeBlockContent language={item.language as any}>
+              {item.code}
+            </CodeBlockContent>
+          </CodeBlockItem>
+        )}
+      </CodeBlockBody>
+    </CodeBlock>
+    </div>
+  );
+};

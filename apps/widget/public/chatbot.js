@@ -1,5 +1,5 @@
 const f = {
-    WIDGET_URL: `https://52f38c355685.ngrok-free.app/`,
+    WIDGET_URL: `http://localhost:3002`,
     DEFAULT_TYPE: "bubble",
   },
   E =
