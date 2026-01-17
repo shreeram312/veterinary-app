@@ -80,10 +80,27 @@ const vetChatbotSessionSchema = new Schema(
   { collection: "vet_chatbot_session" }
 );
 
+const messageSchema = new Schema(
+  {
+    _id: { type: String },
+    id: { type: String, required: true, unique: true },
+    chatId: { type: String, ref: "VetChatbotSession", required: true },
+    role: {
+      type: String,
+      enum: ["user", "assistant"],
+      required: true,
+    },
+    parts: { type: Schema.Types.Mixed, required: true },
+    createdAt: { type: Date, default: Date.now },
+  },
+  { collection: "message" }
+);
+
 const User = model("User", userSchema);
 const Session = model("Session", sessionSchema);
 const Account = model("Account", accountSchema);
 const Verification = model("Verification", verificationSchema);
 const VetChatbotSession = model("VetChatbotSession", vetChatbotSessionSchema);
+const Message = model("Message", messageSchema);
 
-export { User, Session, Account, Verification, VetChatbotSession };
+export { User, Session, Account, Verification, VetChatbotSession, Message };

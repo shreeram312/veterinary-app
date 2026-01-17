@@ -10,9 +10,11 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.12",
     "@veterinary-app/auth": "workspace:*",
     "@veterinary-app/db": "workspace:*",
     "@veterinary-app/env": "workspace:*",
+    "ai": "^6.0.39",
     "better-auth": "catalog:",
     "cors": "^2.8.5",
     "dotenv": "catalog:",
@@ -21,11 +23,11 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@veterinary-app/config": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.14",
     "@types/uuid": "^10.0.0",
+    "@veterinary-app/config": "workspace:*",
     "tsdown": "^0.16.5",
     "tsx": "^4.19.2",
     "typescript": "catalog:"

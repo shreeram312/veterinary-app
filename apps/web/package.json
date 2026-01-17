@@ -17,6 +17,7 @@
     "@tanstack/react-form": "^1.27.3",
     "@veterinary-app/auth": "workspace:*",
     "@veterinary-app/env": "workspace:*",
+    "ai": "^6.0.39",
     "babel-plugin-react-compiler": "^1.0.0",
     "better-auth": "catalog:",
     "class-variance-authority": "^0.7.1",
