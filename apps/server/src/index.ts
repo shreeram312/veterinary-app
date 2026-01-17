@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3002", "http://localhost:3001", "http://veterinary-app-admin.vercel.app", "http://veterinary-app-widget.vercel.app"],
+    origin: ["http://localhost:3002", "http://localhost:3001", "https://veterinary-app-admin.vercel.app", "https://veterinary-app-widget.vercel.app"],
     credentials: true,
   })
 );
