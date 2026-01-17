@@ -1,46 +1,23 @@
+import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
+import { env } from "@veterinary-app/env/server";
 
-type dbCache = {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-};
+const client = new MongoClient(env.DATABASE_URL);
 
-const mongoGlobal = global as typeof globalThis & {
-  mongoose: dbCache;
-};
+// Connect native MongoDB client
+client.connect().then(() => {
+  console.log("MongoDB native client connected");
+}).catch((err) => {
+  console.error("MongoDB native client connection error:", err);
+});
 
-const DATABASE_URL = process.env.DATABASE_URL as string;
+// Connect Mongoose for models
+mongoose.connect(env.DATABASE_URL).then(() => {
+  console.log("Mongoose connected");
+}).catch((err) => {
+  console.error("Mongoose connection error:", err);
+});
 
-if (!DATABASE_URL) {
-  throw new Error("Please define the DATABASE_URL environment variable");
-}
+const db = client.db();
 
-const cached = mongoGlobal.mongoose ?? { conn: null, promise: null };
-mongoGlobal.mongoose = cached;
-async function dbConnect(): Promise<typeof mongoose> {
-  if (cached.conn) {
-    return cached.conn;
-  }
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(DATABASE_URL, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-
-  try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
-
-  return cached.conn;
-}
-const conn = await dbConnect();
-const db = conn.connection.db;
-export { db };
-export * from "./models/auth.model";
+export { db, client };

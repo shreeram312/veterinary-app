@@ -1,11 +1,14 @@
-import { db } from "@veterinary-app/db";
+import { client, db } from "@veterinary-app/db";
 import { env } from "@veterinary-app/env/server";
 import { betterAuth } from "better-auth"; 
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { Db } from "mongodb";
+import { ObjectId } from "mongodb";
+
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db as unknown as Db),
+  database: mongodbAdapter(db , {
+      client: client,
+  } ),
   trustedOrigins: [env.CORS_ORIGIN],
   emailAndPassword: {
     enabled: true,
@@ -16,5 +19,10 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
     },
+    database: {
+      generateId() {
+        return new ObjectId().toString();
+      },
+    },    
   },
 });
