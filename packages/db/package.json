@@ -16,6 +16,7 @@
   "dependencies": {
     "@veterinary-app/env": "workspace:*",
     "dotenv": "catalog:",
+    "mongodb": "^7.0.0",
     "mongoose": "^8.14.0",
     "zod": "catalog:"
   },

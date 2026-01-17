@@ -15,6 +15,7 @@
     "@veterinary-app/env": "workspace:*",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
+    "mongodb": "^7.0.0",
     "zod": "catalog:"
   },
   "devDependencies": {
