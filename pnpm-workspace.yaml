@@ -6,4 +6,4 @@ catalog:
   better-auth: ^1.4.9
   dotenv: ^17.2.2
   typescript: ^5
-  zod: 'catalog:'
+  zod: '^4'
