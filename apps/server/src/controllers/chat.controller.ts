@@ -36,6 +36,19 @@ export const chat = async (req: Request, res: Response) => {
 
     console.log("convertedModelMessages", convertedModelMessages);
 
+    const now = new Date();
+    const currentDate = now.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    const currentTime = now.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
     const contextInfo = [];
     if (session.context?.userName) contextInfo.push(`Pet Owner Name: ${session.context.userName}`);
     if (session.context?.petName) contextInfo.push(`Pet Name: ${session.context.petName}`);
@@ -46,9 +59,11 @@ export const chat = async (req: Request, res: Response) => {
         ? `\n\nCURRENT USER CONTEXT (Use this information - DO NOT ask for it again):\n${contextInfo.join("\n")}`
         : "\n\nCURRENT USER CONTEXT: No additional context provided.";
 
+    const dateTimeInfo = `\n\nCURRENT DATE AND TIME:\nToday is ${currentDate}. The current time is ${currentTime}. Use this information to calculate tomorrow's date, day after tomorrow's date, or any relative dates when users ask for appointment scheduling.`;
+
     const result = streamText({
       model: openai("gpt-4o-mini"),
-      system: `${SYSTEM_PROMPT}${contextString}`,
+      system: `${SYSTEM_PROMPT}${dateTimeInfo}${contextString}`,
       messages: convertedModelMessages,
       tools: {
         bookAppointment: bookAppointmentTool,
